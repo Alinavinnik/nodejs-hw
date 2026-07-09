@@ -11,6 +11,9 @@ const noteSchema = new Schema(
       type: String,
       trim: true,
       default: '',
+    },
+    tag: {
+      type: String,
       enum: [
         'Work',
         'Personal',
@@ -23,10 +26,6 @@ const noteSchema = new Schema(
         'Important',
         'Todo',
       ],
-    },
-    tag: {
-      type: String,
-
       default: 'Todo',
     },
   },

@@ -5,14 +5,16 @@ import { isValidObjectId } from 'mongoose';
 export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1),
-    perPage: Joi.number().integer().min(2).max(20),
+    perPage: Joi.number().integer().min(5).max(20),
     search: Joi.string().trim().allow(''),
     tag: Joi.string().valid(...TAGS),
   }),
 };
 
 const objectIdValidator = (value, helpers) => {
-  return !isValidObjectId(value) ? helpers.message('Invalid id format') : value;
+  return !isValidObjectId(value)
+    ? helpers.message('Invalid MongoDB ObjectId')
+    : value;
 };
 
 export const noteIdSchema = {
@@ -34,7 +36,7 @@ export const updateNoteSchema = {
     noteId: Joi.string().custom(objectIdValidator).required(),
   }),
   [Segments.BODY]: Joi.object({
-    title: Joi.string().min(1).required(),
+    title: Joi.string().min(1),
     content: Joi.string().allow(''),
     tag: Joi.string().valid(...TAGS),
   }).min(1),

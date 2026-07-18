@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { errors } from 'celebrate';
 import noteRoutes from './routes/notesRoutes.js';
+import authRouters from './routes/authRoutes.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
@@ -17,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(noteRoutes);
-
+app.use(authRouters);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);

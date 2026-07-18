@@ -1,0 +1,39 @@
+import { Schema, model } from 'mongoose';
+
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      trim: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      trim: true,
+      minlength: 8,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+userSchema.pre('save', function () {
+  if (!this.username) {
+    this.username = this.email;
+  }
+});
+
+userSchema.method.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
+export const User = model('User', userSchema);

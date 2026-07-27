@@ -4,7 +4,8 @@ import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { errors } from 'celebrate';
 import noteRoutes from './routes/notesRoutes.js';
-import authRouters from './routes/authRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/authRoutes.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
@@ -20,7 +21,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(noteRoutes);
-app.use(authRouters);
+app.use(authRoutes);
+app.use(userRoutes);
 
 app.use(notFoundHandler);
 app.use(errors());

@@ -5,7 +5,7 @@ import { connectMongoDB } from './db/connectMongoDB.js';
 import { errors } from 'celebrate';
 import noteRoutes from './routes/notesRoutes.js';
 import authRoutes from './routes/authRoutes.js';
-import userRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
